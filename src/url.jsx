@@ -1,1 +1,1 @@
-export const URL = 'http://newsworth.com:8014';
+export const URL = 'https://newsworth.com:8014';
