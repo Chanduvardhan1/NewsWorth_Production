@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import Navbar from "../Navbar/navbar";
-import home from '../../src/assets/Images/home/IMG_20240906_161755.jpg'
+import home from '../../src/assets/Images/home/image.png'
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +21,7 @@ const signup = () => {
   const [verify, setVerify] = useState(false);
   const [showRegistrationSuccess, setShowRegistrationSuccess] = useState(true);
   const [showRegistr, setShowRegistr] = useState(true);
+
 
   const navigate = useNavigate();
  
@@ -70,6 +71,9 @@ const [selectedDistrict, setSelectedDistrict] = useState('')
 const [uniqueDistricts, setUniqueDistricts] = useState([]);
 const [hideOtpButtons, setHideOtpButtons] = useState(false); // New state to control OTP buttons visibility
 const [pincodeMessage, setPincodeMessage] = useState('');
+const [success, setSuccess] = useState('');
+const [isChecked1, setIsChecked1] = useState(false); // Checkbox state
+
 //   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 useEffect(() => {
@@ -383,10 +387,13 @@ const handleUserTypeChange = (event) => {
 };
 
 const sendOtp = async () => {
+  setMessage('');
+  setSuccess('');
   if (!email && !mobile) {
     setMessage('Please enter either mobile number or email.');
     return; 
   }
+ 
   setResendAvailable1(false);
   setResendTime1(10 * 60);
   const data = {
@@ -406,8 +413,10 @@ const sendOtp = async () => {
     });
 
     const result = await response.json();
+    setMessage('');
+    setSuccess('');
     if  (result.response === 'fail' && result.response_message === "Please click here to complete your registration and activate your account." && result.data === "verified") {
-      toast.success(result.response_message);
+      setSuccess(result.response_message);
       setVerify(false);
       setshowOTP(false);
       setShowRegistr(false);
@@ -415,7 +424,7 @@ const sendOtp = async () => {
       setHideOtpButtons(true);
     } else if (result.response === 'success') {
       setMessage('');
-      toast.success(result.response_message);
+      setSuccess(result.response_message);
       setshowOTP(true);
       setShowOtpField1(true);
       setVerify(true);
@@ -431,10 +440,13 @@ const sendOtp = async () => {
 };
 
 const verifySignup = async () => {
+  setMessage('');
+  setSuccess('');
   if ((!email && !mobile) || (email && !emailOTP) || (mobile && !mobileOTP)) {
     setMessage('Please provide both email and email OTP, or mobile and mobile OTP.');
     return;
   }
+
   const data = {
     email: email,
     mobile: mobile,
@@ -453,15 +465,17 @@ const verifySignup = async () => {
     });
 
     const result = await response.json();
-
+    setMessage('');
+    setSuccess('');
     if (result.response === 'success') {
-      setMessage('');
+     
       toast.success(result.response_message);
       setVerify(false);
       setshowOTP(false);
       setShowRegistr(false);
     }  else if (result.response === 'fail' && result.response_message === 'Invalid or incorrect OTP.') {
       setMessage('Invalid or incorrect OTP. Please check and try again.');
+      setSuccess('');
     } else {
       setMessage(result.response_message);
     }
@@ -471,6 +485,7 @@ const verifySignup = async () => {
   }
 };
 const fetchLocationDetails = async () => {
+  setPincodeMessage('')
   try {
     const response = await fetch('http://98.70.33.226:8014/location_details/', {
       method: 'POST',
@@ -565,10 +580,13 @@ const handleRegister = async () => {
     return;
   }
   if (password !== confirmPassword) {
-    setErrorMessage("Passwords do not match.");
+    setErrorMessage("Passwords and confirmPassword do not match.");
     return;
   }
-
+  if (!isChecked1) {
+    setErrorMessage("Please agree to the terms and conditions to proceed.");
+    return;
+  }
   // Prepare data for submission
   const data = {
     platform: platform,
@@ -686,10 +704,13 @@ const handleRegister1 = async () => {
     return;
   }
   if (password !== confirmPassword) {
-    setErrorMessage("Passwords do not match.");
+    setErrorMessage("Passwords and confirmPassword do not match.");
     return;
   }
-
+  if (!isChecked1) {
+    setErrorMessage("Please agree to the terms and conditions to proceed.");
+    return;
+  }
   const data = {
     platform: platform,
     org_name: orgname,
@@ -752,7 +773,9 @@ const handleRegister1 = async () => {
   }
 };
 
-
+const handleCheckboxChange = (e) => {
+  setIsChecked1(e.target.checked);
+};
 
   
   const [address1, setAddress1] = useState({});
@@ -1306,29 +1329,31 @@ const handleRegister1 = async () => {
 
 <div className="flex justify-between"> 
   <div className="">
+  {success && <p className=" text-green-600  w-[320px]">{success}</p>}
 
    {message && <p className="text-red-500  w-[320px]">{message}</p>}
   </div>
 
-   {!showOtpField1 ? (
-    <div className="flex justify-end  ">
-    <button className="primary-btn" onClick={sendOtp}>Send OTP</button>
-  </div>
-    
+  {!hideOtpButtons && (
+  !showOtpField1 ? (
+    <div className="flex justify-end">
+      <button className="primary-btn" onClick={sendOtp}>Send OTP</button>
+    </div>
   ) : (
-    <div className="flex justify-end space-x-4  items-center ">
+    <div className="flex justify-end space-x-4 items-center">
       <span className={`text-sm ${resendAvailable1 ? 'text-gray-500' : 'text-red-500'}`}>
         {resendAvailable1 ? "" : ` (${formatTime(resendTime1)})`}
       </span>
       <button
-       onClick={sendOtp}
+        onClick={sendOtp}
         disabled={!resendAvailable1}
         className={`p-[5px] px-4 rounded-[50px] ${resendAvailable1 ? 'bg-blue-500 text-white hover:bg-blue-600' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
       >
         {resendAvailable1 ? "Resend OTP" : "Resend OTP"}
       </button>
     </div>
-  )}
+  )
+)}
 </div>
   {showOTP && (
   <div className=" flex gap-[5px] justify-center">
@@ -1448,6 +1473,21 @@ const handleRegister1 = async () => {
         autoComplete: "off",
       }} />
 </div>
+<div className="flex items-center mb-4">
+    <input
+      type="checkbox"
+      id="termsCheckbox"
+      onChange={handleCheckboxChange}
+      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+      required
+    />
+    <label htmlFor="termsCheckbox" className="ml-2 text-sm text-gray-700">
+      I agree with the{" "}
+      <a href="#" className="text-blue-600 underline">
+        terms and conditions
+      </a>
+    </label>
+  </div>
 {errorMessage && <p className="text-red-500  w-[320px]">{errorMessage}</p>}
 
 {showRegistr ?(
@@ -1668,6 +1708,7 @@ const handleRegister1 = async () => {
 
 <div className="flex justify-between"> 
   <div className="">
+  {success && <p className=" text-green-600  w-[320px]">{success}</p>}
 
    {message && <p className="text-red-500  w-[320px]">{message}</p>}
   </div>
@@ -1811,7 +1852,21 @@ const handleRegister1 = async () => {
         autoComplete: "off",
       }} />
 </div>
-
+<div className="flex items-center mb-4">
+    <input
+      type="checkbox"
+      id="termsCheckbox"
+      onChange={handleCheckboxChange}
+      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+      required
+    />
+    <label htmlFor="termsCheckbox" className="ml-2 text-sm text-gray-700">
+      I agree with the{" "}
+      <a href="#" className="text-blue-600 underline">
+        terms and conditions
+      </a>
+    </label>
+  </div>
 {errorMessage && <p className="text-red-500  w-[320px]">{errorMessage}</p>}
 
 
