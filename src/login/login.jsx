@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Navbar from "../Navbar/navbar";
 import home from '../../src/assets/Images/home/image.png'
+import { AuthContext } from "../Authcontext/AuthContext.jsx"
 
 
 import { TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
@@ -21,6 +22,7 @@ const login = () => {
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
 const [errorMessage, setErrorMessage] = useState('')
+const { login } =  useContext(AuthContext);
 
   const handleLoginMethodChange = (method) => {
     setLoginMethod(method);
@@ -100,7 +102,9 @@ const [errorMessage, setErrorMessage] = useState('')
       const data = await response.json();
   
       if (data.response === 'success') {
-        navigate('/dashboard');  // Redirect to the dashboard or another page after successful login
+        const userId = data.data[0].user_id; // Get the user_id from the response
+        login(accessToken);
+        navigate('/dashboard', { state: { user_id: userId } });
       } else if (data.detail === "Incorrect username or password") {
         setErrorMessage("Incorrect username or password. Please try again.");
       } else {
@@ -158,9 +162,37 @@ const [errorMessage, setErrorMessage] = useState('')
                       <h1>Login</h1>
                    </div>
                    <div className="flex flex-col justify-center items-center">
-                      <div className="flex flex-col gap-[10px] bg-white rounded-[28px] shadow-lg p-5 lg:p-7 pb-5 border border-solid border-[1px]">
-                         <div className="flex flex-col gap-[10px] pt-[20px]"> 
-                            <FormControl variant="outlined" required>
+                      <div className="flex flex-col gap-[10px] bg-white rounded-[28px] shadow-lg p-5 lg:p-7 pb-5 border-solid border-[1px]">
+                      <div className="relative flex justify-between w-full font-bold">
+      <div
+        className={`cursor-pointer flex-1 text-center py-2 ${loginMethod === 'email' ? '' : ''}`}
+        onClick={() => setUserType('Email')}
+      >
+        Email
+      </div>
+      <div
+        className={`cursor-pointer flex-1 text-center py-2 ${loginMethod === 'mobile' ? '' : ''}`}
+        onClick={() => setUserType('Mobile')}
+      >
+        Mobile
+      </div>
+      <div
+        className={`cursor-pointer flex-1 text-center py-2 ${loginMethod === 'gmail' ? '' : ''}`}
+        onClick={() => setUserType('User Id')}
+      >
+        User Id
+      </div>
+      <div
+    className={`absolute bottom-0 h-[2px] w-1/3 transition-all duration-300 ${
+      userType === 'Email' ? 'left-0 bg-red-500' : 
+      userType === 'Mobile' ? 'left-1/3 bg-blue-500' : 
+      'left-2/3 bg-green-500'
+    }`}
+  />
+    </div>
+                         <div className="flex flex-col gap-[10px] pt-[10px]">
+             
+                            {/* <FormControl variant="outlined" required>
                                <InputLabel id="gender-label">Login Option</InputLabel>
                                <Select
                                   labelId="Login Option"
@@ -176,7 +208,7 @@ const [errorMessage, setErrorMessage] = useState('')
                                   <MenuItem value="User Id">User Id</MenuItem>
                                   <MenuItem value="Mobile">Mobile</MenuItem>
                                </Select>
-                            </FormControl>
+                            </FormControl> */}
                             {userType === "Email" && (
                             <TextField
                                id="email"
@@ -399,6 +431,11 @@ const [errorMessage, setErrorMessage] = useState('')
           </div>
        </main>
     </div>
+
+    
+
+   
+       
  </>
  
   
