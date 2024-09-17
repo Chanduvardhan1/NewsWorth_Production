@@ -536,7 +536,7 @@ const verifySignup = async () => {
     setSuccess('');
     if (result.response === 'success') {
      
-      toast.success(result.response_message);
+      setSuccess(result.response_message);
       setVerify(false);
       setshowOTP(false);
       setShowRegistr(false);
@@ -648,7 +648,8 @@ const handleRegister = async () => {
   const platform = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     ? "mobile"
     : "Web";
-
+    setMessage('');
+    setSuccess('');
   // Validate required fields
   if (!firstName || !lastName) {
     setErrorMessage("Please enter first name and last name.");
@@ -756,7 +757,8 @@ const handleRegister = async () => {
 
 
 const handleRegister1 = async () => {
-  
+  setMessage('');
+  setSuccess('');
   const platform = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   ? "mobile"
   : "Web";
