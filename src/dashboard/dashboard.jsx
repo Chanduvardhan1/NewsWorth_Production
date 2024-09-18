@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect,useRef,useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -6,6 +6,29 @@ import Landing from "../landing/landing";
 import facebook from "../../src/assets/Images/footer/facebook-app-symbol.png"
 // import Footer from "../footer/footer";
 import { useNavigate } from 'react-router-dom';
+import { URL } from "../url";
+import { useLocation } from 'react-router-dom';
+import { AuthContext } from "../Authcontext/AuthContext";
+import icon1 from '../../src/assets/Images/dashboard/musical-note.png';
+import image1 from '../../src/assets/Images/home/breaking-news-in-2029-5994.mp3';
+import cartIcon from '../../src/assets/Images/dashboard/grocery-store.png';
+
+import imgSrc from '../../src/assets/Images/dashboard/HYD.webp';
+import chatImg from '../../src/assets/Images/dashboard/chat.png';
+import bookmarkImg from '../../src/assets/Images/dashboard/bookmark.png';
+import shareImg from '../../src/assets/Images/dashboard/share.png';
+import moreImg from '../../src/assets/Images/dashboard/more.png';
+import likeImg from '../../src/assets/Images/dashboard/like.png';
+
+
+import videoSrc from '../../src/assets/Images/home/YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024 @SakshiTV.mp4';
+import videoSrc1 from '../../src/assets/Images/home/10_30 PM _ 12th September 2024 _ ETV News _ News Headlines _ ETV Andhra Pradesh.mp4';
+import videoSrc2 from '../../src/assets/Images/home/CM Mamata Banerjee Responds to RG Kar Medical College Case_ Appeals for Doctors  Cooperation.mp4';
+import videoSrc3 from '../../src/assets/Images/home/YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024 @SakshiTV.mp4';
+
+
+import channelIcon from '../../src/assets/Images/landing/pic.jpg';
+
 
 // const testimonialData = [
 //     {
@@ -31,12 +54,12 @@ const cardData = [
       timeAgo: '2 hours ago',
       location: 'Hyderabad',
       description: 'Officials in Ranga Reddy district are planning to establish a World Trade Center in the upcoming Future City on the outskirts of Hyderabad. Representatives from the World Trade Centers Association have expressed interest in setting up a center in Hyderabad, similar to the one in the United States. Authorities are considering three locations for this purpose and estimate that around 70 acres of land will be required.',
-      imgSrc: 'src/assets/Images/dashboard/HYD.webp',
-      likeImg: 'src/assets/Images/dashboard/like.png',
-      chatImg: 'src/assets/Images/dashboard/chat.png',
-      bookmarkImg: 'src/assets/Images/dashboard/bookmark.png',
-      shareImg: 'src/assets/Images/dashboard/share.png',
-      moreImg: 'src/assets/Images/dashboard/more.png',
+      imgSrc: imgSrc,
+      likeImg: likeImg,
+      chatImg: chatImg,
+      bookmarkImg: bookmarkImg,
+      shareImg: shareImg,
+      moreImg:moreImg,
     },
     {
         id: 2,
@@ -44,12 +67,12 @@ const cardData = [
         timeAgo: '4 hours ago',
         location: 'Hyderabad',
         description: 'A hearing took place in the High Court regarding the immersion of Ganesh idols in Hussain Sagar. The petitioner requested the implementation of previous High Court orders that prohibited immersions in Hussain Sagar. The petitioner also requested that the Hyderabad Metropolitan Development Authority (HMDA) be added as a respondent, arguing that it is responsible for the protection of Hussain Sagar. The court stated that it will hear arguments tomorrow, with the Chief Justice bench scheduled to listen to the case.',
-        imgSrc: 'src/assets/Images/dashboard/Highcourt.webp',
-        likeImg: 'src/assets/Images/dashboard/like.png',
-        chatImg: 'src/assets/Images/dashboard/chat.png',
-        bookmarkImg: 'src/assets/Images/dashboard/bookmark.png',
-        shareImg: 'src/assets/Images/dashboard/share.png',
-        moreImg: 'src/assets/Images/dashboard/more.png',
+        imgSrc: imgSrc,
+        likeImg: likeImg,
+        chatImg: chatImg,
+        bookmarkImg: bookmarkImg,
+        shareImg: shareImg,
+        moreImg:moreImg,
       },
       {
         id: 3,
@@ -57,12 +80,12 @@ const cardData = [
         timeAgo: '1 hours ago',
         location: 'Anakapalli',
         description: 'Due to heavy rains in Anakapalli district, paddy crops spread across 1,528 hectares belonging to 4,420 farmers have been submerged, according to District Agriculture Officer Mohan Rao. After the water recedes from the fields, he advised farmers to apply 20 kg of urea and 20 kg of potash fertilizers per acre of paddy fields. To prevent pests, he suggested spraying Gram Carbon disulfide powder mixed with water at the rate of one liter per field.',
-        imgSrc: 'src/assets/Images/dashboard/Farmer.webp',
-        likeImg: 'src/assets/Images/dashboard/like.png',
-        chatImg: 'src/assets/Images/dashboard/chat.png',
-        bookmarkImg: 'src/assets/Images/dashboard/bookmark.png',
-        shareImg: 'src/assets/Images/dashboard/share.png',
-        moreImg: 'src/assets/Images/dashboard/more.png',
+        imgSrc: imgSrc,
+        likeImg: likeImg,
+        chatImg: chatImg,
+        bookmarkImg: bookmarkImg,
+        shareImg: shareImg,
+        moreImg:moreImg,
       },
       {
         id: 4,
@@ -70,12 +93,12 @@ const cardData = [
         timeAgo: '2 hours ago',
         location: 'Krishna',
         description: 'In flood-affected colonies of Vijayawada, thieves are targeting locked houses, stealing cash, gold, and gas cylinders from safes. In Luna Center, thieves took 10 tolas of gold and ₹1.5 lakh in cash, while in Bombay Colony, 3 tolas of gold were stolen. Similar thefts occurred in Singh Nagar and other areas, according to the distressed victims. Many have returned from safer places only to find their belongings looted, leaving them in tears.',
-        imgSrc: 'src/assets/Images/dashboard/Vig.webp',
-        likeImg: 'src/assets/Images/dashboard/like.png',
-        chatImg: 'src/assets/Images/dashboard/chat.png',
-        bookmarkImg: 'src/assets/Images/dashboard/bookmark.png',
-        shareImg: 'src/assets/Images/dashboard/share.png',
-        moreImg: 'src/assets/Images/dashboard/more.png',
+        imgSrc: imgSrc,
+        likeImg: likeImg,
+        chatImg: chatImg,
+        bookmarkImg: bookmarkImg,
+        shareImg: shareImg,
+        moreImg:moreImg,
       },
    
     
@@ -83,75 +106,78 @@ const cardData = [
     
     // Add more data objects here if needed
   ];
-  const cardData1 = [
+  const cardData2 = [
     {
       id: 1,
-      icon: 'src/assets/Images/dashboard/musical-note.png',
+      icon: icon1,
       title: 'Vinesh Phogat',
       price: 'RS | 100',
       description: 'The Congress candidate for Julana, Vinesh Phogat, has mentioned in her affidavit that she owns a Volvo XC 60 (₹35 lakhs), a Hyundai Creta, and an Innova car. She has taken a loan of ₹13 lakhs for the Innova and is paying EMIs. She owns a plot worth ₹2 crore in Sonipat. She also has ₹1.95 lakhs in cash. According to her IT returns, she earned ₹13,85,000 in the last financial year. Her husband, Somveer, owns a Mahindra Scorpio.',
-      image: 'src/assets/Images/dashboard/news1.webp',
+      image: image1,
       userName: 'chandu',
       days: '10 days',
       location: 'Bangalore',
       createdBy:'Chandu',
       Date:'6-09-2024',
-      cartIcon: 'src/assets/Images/dashboard/grocery-store.png'
+      cartIcon: cartIcon
     },
     {
         id: 2,
-        icon: 'src/assets/Images/dashboard/musical-note.png',
+        icon: icon1,
         title: 'Cricket practice',
         price: 'RS | 300',
         description: ' Cricketers practiced at the RDT Stadium in Anantapur. Players arrived at the stadium from their hotels in special buses and sweated it out in the nets...',
-        image: 'src/assets/Images/dashboard/crickit.webp',
+        image: image1,
+
         userName: 'Ram',
         days: '1 days',
         location: 'Bangalore',
         location: 'Bangalore',
         createdBy:'Chandu',
         Date:'6-09-2024',
-        cartIcon: 'src/assets/Images/dashboard/grocery-store.png'
+        cartIcon:cartIcon
       },
       {
         id: 3,
-        icon: 'src/assets/Images/dashboard/musical-note.png',
+        icon: icon1,
         title: 'Virat Kohli',
         price: 'RS | 500',
         description: 'Cricketer Virat Kohli is on the brink of achieving a rare record. He has scored 26,952 runs in 591 international innings so far. With just 58 more runs, he will become the first player to reach 27,000 runs in the fewest innings. Currently, the record is held by Sachin Tendulkar with 27,000 runs in 623 innings. In international cricket, only Sachin Tendulkar, Ricky Ponting, and Kumar Sangakkara have scored over 27,000 runs.',
-        image: 'src/assets/Images/dashboard/viratkhoil.webp',
+        image: image1,
+
         userName: 'Vardhan',
         days: '10 days',
         location: 'Bangalore',
         location: 'Bangalore',
         createdBy:'Chandu',
         Date:'6-09-2024',
-        cartIcon: 'src/assets/Images/dashboard/grocery-store.png'
+        cartIcon: cartIcon
       },
       {
         id: 4,
-        icon: 'src/assets/Images/dashboard/musical-note.png',
+        icon: icon1,
         title: ' Asia Champions Trophy',
         price: 'RS | 150',
         description: 'In the Asia Champions Trophy, the Indian hockey team has advanced to the semifinals. They secured a 3-1 victory over Korea in todays match, ensuring their place in the semifinals with one league match still remaining. As the defending champions, India has remained unbeaten in the league stage so far. Notably, the Indian team, led by Harmanpreet Singh, will play their final league match against Pakistan on the 14th of this month.',
-        image: 'src/assets/Images/dashboard/hockey.webp',
+        image: image1,
+      
         userName: 'chandu',
         days: '10 days',
         location: 'Bangalore',
         location: 'Bangalore',
         createdBy:'Chandu',
         Date:'6-09-2024',
-        cartIcon: 'src/assets/Images/dashboard/grocery-store.png'
+        cartIcon:cartIcon
       },
     // You can add more card data objects here
   ];
   const videoData = [
     {
       id: 1,
-      videoSrc: 'src/assets/Images/home/YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024 @SakshiTV.mp4', // video file or URL
+      videoSrc: videoSrc, // video file or URL
       thumbnail: 'your-thumbnail-1.jpg', // thumbnail URL if needed
       title: 'YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024',
-      channelIcon: 'src/assets/Images/landing/pic.jpg', // channel icon image
+      channelIcon: channelIcon, // channel icon image
       views: '9.2M views',
       duration: '2:29',
       postedTime: '18 hours ago',
@@ -159,11 +185,11 @@ const cardData = [
     },
     {
       id: 2,
-      videoSrc: 'src/assets/Images/home/10_30 PM _ 12th September 2024 _ ETV News _ News Headlines _ ETV Andhra Pradesh.mp4', // video file or URL
+      videoSrc: videoSrc1, // video file or URL
 
       thumbnail: 'your-thumbnail-2.jpg',
       title: '10:30 PM | 12th September 2024 | ETV News | News Headlines | ETV Andhra Pradesh',
-      channelIcon: 'src/assets/Images/landing/pic.jpg', // channel icon image
+      channelIcon: channelIcon, // channel icon image
       views: '280 views',
       duration: '1:31',
       postedTime: '2 days ago',
@@ -171,12 +197,12 @@ const cardData = [
     },
     {
         id: 3,
-        videoSrc: 'src/assets/Images/home/CM Mamata Banerjee Responds to RG Kar Medical College Case_ Appeals for Doctors  Cooperation.mp4', // video file or URL
+        videoSrc: videoSrc2, // video file or URL
   
         thumbnail: 'src/assets/Images/home/YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024 @SakshiTV.mp4',
 
         title: 'CM Mamata Banerjee Responds to RG Kar Medical College Case_ Appeals for Doctors  Cooperation',
-        channelIcon: 'src/assets/Images/landing/pic.jpg', // channel icon image
+        channelIcon: channelIcon, // channel icon image
         views: '1.5M views',
         duration: '1:22',
         postedTime: '2 days ago',
@@ -184,11 +210,11 @@ const cardData = [
       },
       {
         id: 4,
-        videoSrc: 'src/assets/Images/home/YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024 @SakshiTV.mp4', // video file or URL
+        videoSrc: videoSrc3, // video file or URL
   
         thumbnail: 'src/assets/Images/home/YS Jagan Takes Oath as MLA _ AP Assembly Sessions 2024 @SakshiTV.mp4',
         title: 'Some Other Trailer | Actor | Actress',
-        channelIcon: 'src/assets/Images/landing/pic.jpg', // channel icon image
+        channelIcon: channelIcon, // channel icon image
         views: '1.5M views',
         duration: '3:10',
         postedTime: '2 days ago',
@@ -200,8 +226,12 @@ const cardData = [
   ];
 const dashboard = () => {
     const [flippedCards, setFlippedCards] = useState({});
+    const [cardData1, setCardData1] = useState([]);
     const navigate = useNavigate();
     const videoRef = useRef(null);
+    const location = useLocation();
+    const { user_id } = location.state || {};
+    const { isAuthenticated, authToken } = useContext(AuthContext);
 
     const handleVideoClick = () => {
       navigate(`/watch`);
@@ -221,12 +251,51 @@ const dashboard = () => {
     };
   
   // Function to handle flip
-  const handleFlip = (cardId) => {
-    setFlippedCards((prevState) => ({
-      ...prevState,
-      [cardId]: !prevState[cardId], // Toggle the flip state
+  const handleFlip = (id) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [id]: !prev[id],
     }));
   };
+  const handleFlip1 = (id) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login"); // Redirect to login if not authenticated
+      return;
+    }
+    const fetchData = async () => {
+      try {
+
+  
+        const response = await fetch(
+          `${URL}/landing page?user_id=95`,
+          {
+            method: "POST",
+            headers: {
+              "accept": "application/json",
+              Authorization: `Bearer ${authToken}`,
+
+            },
+            body: JSON.stringify({}) // Empty body for a POST request
+          }
+        );
+        const data = await response.json();
+
+        if (data.response === "success") {
+          setCardData1(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
+    fetchData();
+  }, [user_id]);
     // var settings = {
     //     dots: true,
     //     arrows: true,
@@ -356,53 +425,55 @@ className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
        ))}
     </div>
     <div>
-    <h1 className="font-bold text-[30px] my-[20px]">Images</h1>
+    <h1 className="font-bold cur text-[30px] my-[20px]">Images</h1>
 </div>
 
 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
-  {cardData1.map((card) => (
-    <div key={card.id}   className=" shadow-md overflow-hidden border border-gray-300 rounded-lg flex flex-col h-full">
+{cardData1
+        .filter((card) => card.content_type === "Image") // Filter by content_type
+        .map((card, index) => (
+    <div key={index}   className=" shadow-md overflow-hidden border border-gray-300 rounded-lg flex flex-col h-full">
       <div  className="flex justify-end px-2 pt-1" >
         {/* Flip button */}
         <img
           src="src/assets/Images/dashboard/flip.png"
           alt="flip"
           className="w-5 h-5 cursor-pointer"
-          onClick={() => handleFlip(card.id)}
+          onClick={() => handleFlip(index)}
         />
       </div>
 
       {/* Conditional rendering based on flip state */}
-      {!flippedCards[card.id] ? (
+      {!flippedCards[index] ? (
         // Front side of the card
         <>
           <div className="flex justify-between p-2 border-b border-blue-300">
             <div className="p-1 border border-blue-300 rounded-md">
-              <img src={card.icon} alt="icon" className="w-5 h-5" />
+              <img src="src/assets/Images/dashboard/musical-note.png" alt="icon" className="w-5 h-5" />
             </div>
             <div className="p-1 border border-blue-300 rounded-md">
-              <h1 className="font-bold text-sm">{card.title}</h1>
+              <h1 className="font-bold text-sm">{card.content_title}</h1>
             </div>
             <div className="p-1 border border-blue-300 rounded-md">
-              <h1 className="text-sm">{card.price}</h1>
+              <h1 className="text-sm">{card.final_price}</h1>
             </div>
           </div>
           <div className="p-2">
             <p className="truncate text-gray-500 p-1 border border-blue-300 rounded-md text-sm">
-              {card.description}
+              {card.content_description}
             </p>
           </div>
           <div onClick={handleImagesClick} className="flex justify-center cursor-pointer">
-            <img src={card.image} alt="social media" className="w-full h-40 " />
+            <img src={card.content_link} alt="social media" className="w-full h-40 " />
           </div>
-          <div className="flex justify-between items-center p-2 border-t border-black text-sm">
-            <h1>{card.userName}</h1>
+          <div className="flex justify-between items-center gap-[5px] p-2 border-t border-black text-sm">
+            <h1 className=" lg:truncate lg:w-[20%]">{card.uploaded_by}</h1>
             <p>|</p>
-            <h1>{card.days}</h1>
+            <h1 className=" lg:truncate lg:w-[20%]">{card.age_in_days}</h1>
             <p>|</p>
-            <h1>{card.location}</h1>
+            <h1 className=" lg:truncate lg:w-[60%]">{card.gps_location}</h1>
             <p>|</p>
-            <img src={card.cartIcon} alt="cart" className="w-5 h-5" />
+            <img src='src/assets/Images/dashboard/grocery-store.png' alt="cart" className="w-5 h-5" />
           </div>
         </>
       ) : (
@@ -410,41 +481,40 @@ className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
         <div className="flex flex-col ">
           <div className="flex justify-between p-2 border-b border-blue-300">
             <div className="p-1 border border-blue-300 rounded-md">
-              <img src={card.icon} alt="icon" className="w-5 h-5" />
+              <img src='src/assets/Images/dashboard/musical-note.png' alt="icon" className="w-5 h-5" />
             </div>
             <div className="p-1 border border-blue-300 rounded-md">
-              <h1 className="font-bold text-sm">{card.title}</h1>
+              <h1 className="font-bold text-sm">{card.content_title}</h1>
             </div>
             <div className="p-1 border border-blue-300 rounded-md">
-              <h1 className="text-sm">{card.price}</h1>
+              <h1 className="text-sm">{card.final_price}</h1>
             </div>
           </div>
           <div className="p-2">
             <p className="truncate p-1 border border-blue-300 rounded-md text-sm">
-              {card.description}
+              {card.content_description}
             </p>
           </div>
           <div className="flex flex-col w-full h-40 p-2 text-sm">
-            <p className="font-bold">Date: <span className="font-normal">{card.Date}</span></p>
-            <p className="font-bold">Created by: <span className="font-normal">{card.createdBy}</span></p>
-            <p className="font-bold">Location: <span className="font-normal">{card.location}</span></p>
+            <p className="font-bold">Date: <span className="font-normal">{card.uploaded_time}</span></p>
+            <p className="font-bold">Created by: <span className="font-normal">{card.uploaded_by}</span></p>
+            <p className="font-bold">Location: <span className="font-normal">{card.final_price}</span></p>
           </div>
-          <div className="flex justify-between items-center p-2 border-t border-black text-sm">
-            <h1>{card.userName}</h1>
+          <div className="flex justify-between items-center gap-[5px] p-2 border-t border-black text-sm">
+          <h1 className=" lg:truncate lg:w-[20%]">{card.uploaded_by}</h1>
             <p>|</p>
-            <h1>{card.days}</h1>
+            <h1 className=" lg:truncate lg:w-[20%]">{card.age_in_days}</h1>
             <p>|</p>
-            <h1>{card.location}</h1>
+            <h1 className=" lg:truncate lg:w-[60%]">{card.gps_location}</h1>
             <p>|</p>
-            <img src={card.cartIcon} alt="cart" className="w-5 h-5" />
+            <img src='src/assets/Images/dashboard/grocery-store.png' alt="cart" className="w-5 h-5" />
           </div>
         </div>
       )}
     </div>
   ))}
 </div>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
   {cardData.map((card) => (
     <div key={card.id} className="shadow-md rounded-xl overflow-hidden flex flex-col items-center">
       <div onClick={handleImagesClick} className="w-full h-40 sm:h-48 lg:h-56 xl:h-64 rounded-t-xl overflow-hidden">
@@ -488,6 +558,97 @@ className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
     </div>
   ))}
 </div>
+<div>
+    <h1 className="font-bold text-[30px] my-[20px]">Audio</h1>
+</div>
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+{cardData2.map((card) => (
+    <div key={card.id}   className=" shadow-md overflow-hidden border border-gray-300 rounded-lg flex flex-col h-full">
+      <div  className="flex justify-end px-2 pt-1" >
+        {/* Flip button */}
+        <img
+          src="src/assets/Images/dashboard/flip.png"
+          alt="flip"
+          className="w-5 h-5 cursor-pointer"
+          onClick={() => handleFlip1(card.id)}
+        />
+      </div>
+
+      {/* Conditional rendering based on flip state */}
+      {!flippedCards[card.id] ? (
+        // Front side of the card
+        <>
+          <div className="flex justify-between p-2 border-b border-blue-300">
+            <div className="p-1 border border-blue-300 rounded-md">
+              <img src="src/assets/Images/dashboard/musical-note.png" alt="icon" className="w-5 h-5" />
+            </div>
+            <div className="p-1 border border-blue-300 rounded-md">
+              <h1 className="font-bold text-sm">{card.title}</h1>
+            </div>
+            <div className="p-1 border border-blue-300 rounded-md">
+              <h1 className="text-sm">{card.price}</h1>
+            </div>
+          </div>
+          <div className="p-2">
+            <p className="truncate text-gray-500 p-1 border border-blue-300 rounded-md text-sm">
+              {card.description}
+            </p>
+          </div>
+          <div  className="flex justify-center cursor-pointer">
+          <audio  controls className="w-full h-40 pb-16">
+    <source src={card.image} type="audio/mp3" /> {/* Assuming the audio file is in MP3 format */}
+  </audio>
+          </div>
+          <div className="flex justify-between items-center gap-[5px] p-2 border-t border-black text-sm">
+            <h1 className=" ">{card.userName}</h1>
+            <p>|</p>
+            <h1 className=" ">{card.days}</h1>
+            <p>|</p>
+            <h1 className="">{card.location}</h1>
+            <p>|</p>
+            <img src='src/assets/Images/dashboard/grocery-store.png' alt="cart" className="w-5 h-5" />
+          </div>
+        </>
+      ) : (
+        // Back side of the card
+        <div className="flex flex-col ">
+          <div className="flex justify-between p-2 border-b border-blue-300">
+            <div className="p-1 border border-blue-300 rounded-md">
+              <img src='src/assets/Images/dashboard/musical-note.png' alt="icon" className="w-5 h-5" />
+            </div>
+            <div className="p-1 border border-blue-300 rounded-md">
+              <h1 className="font-bold text-sm">{card.title}</h1>
+            </div>
+            <div className="p-1 border border-blue-300 rounded-md">
+              <h1 className="text-sm">{card.price}</h1>
+            </div>
+          </div>
+          <div className="p-2">
+            <p className="truncate p-1 border border-blue-300 rounded-md text-sm">
+              {card.description}
+            </p>
+          </div>
+          <div className="flex flex-col w-full h-40 p-2 text-sm">
+            <p className="font-bold">Date: <span className="font-normal">{card.Date}</span></p>
+            <p className="font-bold">Created by: <span className="font-normal">{card.createdBy}</span></p>
+            <p className="font-bold">Location: <span className="font-normal">{card.location}</span></p>
+          </div>
+          <div className="flex justify-between items-center gap-[5px] p-2 border-t border-black text-sm">
+          <h1 className=" ">{card.userName}</h1>
+            <p>|</p>
+            <h1 className=" ">{card.days}</h1>
+            <p>|</p>
+            <h1 className=" ">{card.location}</h1>
+            <p>|</p>
+            <img src='src/assets/Images/dashboard/grocery-store.png' alt="cart" className="w-5 h-5" />
+          </div>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
+
 
 
 {/* <div className="shadow-md rounded-[20px] overflow-hidden w-[20%] h-[20%]">
