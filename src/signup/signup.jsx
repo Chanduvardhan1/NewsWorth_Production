@@ -544,7 +544,7 @@ const verifySignup = async () => {
       setIsEditable(false);
       setShowMobileOTP(false);
       setShowEmailOTP(false);
-
+      setHideOtpButtons(true);
     }  else if (result.response === 'fail' && result.response_message === 'Invalid or incorrect OTP.') {
       setMessage('Invalid or incorrect OTP. Please check and try again.');
       setSuccess('');
