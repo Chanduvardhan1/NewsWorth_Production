@@ -542,6 +542,9 @@ const verifySignup = async () => {
       setShowRegistr(false);
       setShowPassword1(true);
       setIsEditable(false);
+      setShowMobileOTP(false);
+      setShowEmailOTP(false);
+
     }  else if (result.response === 'fail' && result.response_message === 'Invalid or incorrect OTP.') {
       setMessage('Invalid or incorrect OTP. Please check and try again.');
       setSuccess('');
