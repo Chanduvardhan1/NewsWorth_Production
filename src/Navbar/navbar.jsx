@@ -1,6 +1,6 @@
 import React , { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../src/assets/Images/home/NewsWorth.png"
+import logo from "../../src/assets/Images/home/newsworthlogo.png"
 import { NavLink } from 'react-router-dom';
 
 
@@ -8,11 +8,10 @@ const navbar = () => {
   const [activePage, setActivePage] = useState('home'); // default is 'home'
 
   const navigate = useNavigate();
-  // const handlehome= () => {
-  //  navigate('/')
-  //  setActive("/");
+  const handlehome= () => {
+   navigate('/')
 
-  // };
+  };
  
   // const handleSignup= () => {
   //    navigate('/signup')
@@ -30,7 +29,7 @@ const navbar = () => {
   return (
     <div className=" flex justify-between p-5 px-[5%]">
 <div>
-<img  src={logo} alt="NewsWorth" width={100} height={100} className="transition-transform duration-300 ease-in-out  cursor-pointer " />
+<img  src={logo} alt="NewsWorth" width={100} height={100} className="transition-transform duration-300 ease-in-out  cursor-pointer "  onClick={handlehome} />
 </div>
 <div className="flex text-[16px] gap-[45px]  font-bold justify-center items-center cursor-pointer ">
 
