@@ -28,6 +28,9 @@ import videoSrc3 from '../../src/assets/Images/home/YS Jagan Takes Oath as MLA _
 import Filters from "../filters/filters";
 import channelIcon from '../../src/assets/Images/landing/pic.jpg';
 
+import flip from '../../src/assets/Images/dashboard/flip.png';
+import musical from '../../src/assets/Images/dashboard/musical-note.png';
+import grocery from '../../src/assets/Images/dashboard/grocery-store.png'
 
 import Dashboardimg from "./dashboardimg";
 const cardData = [
@@ -316,7 +319,7 @@ const images = () => {
       <div  className="flex justify-end px-2 pt-1" >
         {/* Flip button */}
         <img
-          src="src/assets/Images/dashboard/flip.png"
+          src={flip}
           alt="flip"
           className="w-5 h-5 cursor-pointer"
           onClick={() => handleFlip(index)}
@@ -329,7 +332,7 @@ const images = () => {
         <>
           <div className="flex justify-between p-2 border-b border-blue-300">
             <div className="p-1 border border-blue-300 rounded-md">
-              <img src="src/assets/Images/dashboard/musical-note.png" alt="icon" className="w-5 h-5" />
+              <img src={musical} alt="icon" className="w-5 h-5" />
             </div>
             <div className="p-1 border border-blue-300 rounded-md">
               <h1 className="font-bold text-sm">{card.content_title}</h1>
@@ -353,7 +356,7 @@ const images = () => {
             <p>|</p>
             <h1 className=" lg:truncate lg:w-[60%]">{card.gps_location}</h1>
             <p>|</p>
-            <img src='src/assets/Images/dashboard/grocery-store.png' alt="cart" className="w-5 h-5" />
+            <img src={grocery} alt="cart" className="w-5 h-5" />
           </div>
         </>
       ) : (
@@ -361,7 +364,7 @@ const images = () => {
         <div className="flex flex-col ">
           <div className="flex justify-between p-2 border-b border-blue-300">
             <div className="p-1 border border-blue-300 rounded-md">
-              <img src='src/assets/Images/dashboard/musical-note.png' alt="icon" className="w-5 h-5" />
+              <img src={musical} alt="icon" className="w-5 h-5" />
             </div>
             <div className="p-1 border border-blue-300 rounded-md">
               <h1 className="font-bold text-sm">{card.content_title}</h1>
@@ -387,7 +390,7 @@ const images = () => {
             <p>|</p>
             <h1 className=" lg:truncate lg:w-[60%]">{card.gps_location}</h1>
             <p>|</p>
-            <img src='src/assets/Images/dashboard/grocery-store.png' alt="cart" className="w-5 h-5" />
+            <img src={grocery} alt="cart" className="w-5 h-5" />
           </div>
         </div>
       )}
