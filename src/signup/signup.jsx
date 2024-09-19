@@ -538,13 +538,13 @@ const verifySignup = async () => {
      
       setSuccess(result.response_message);
       setVerify(false);
-      setshowOTP(false);
       setShowRegistr(false);
       setShowPassword1(true);
       setIsEditable(false);
       setShowMobileOTP(false);
       setShowEmailOTP(false);
       setHideOtpButtons(true);
+      // setResset(false);
     }  else if (result.response === 'fail' && result.response_message === 'Invalid or incorrect OTP.') {
       setMessage('Invalid or incorrect OTP. Please check and try again.');
       setSuccess('');
@@ -760,14 +760,14 @@ const handleRegister = async () => {
 
 
 const handleRegister1 = async () => {
-  setMessage('');
-  setSuccess('');
+  
   const platform = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
   ? "mobile"
   : "Web";
   let hasError = false;
 
-
+  setMessage('');
+  setSuccess('');
 
   // if (!dob) {
   //   setErrorMessage("Please enter date of birth.");
@@ -1790,6 +1790,7 @@ const handleCheckboxChange = (e) => {
             </MenuItem>
             <MenuItem value="Female">Female</MenuItem>
             <MenuItem value="Male">Male</MenuItem>
+            <MenuItem value="I prefer not to say">I prefer not to say</MenuItem>
           </Select>
         </FormControl>
 </div>
