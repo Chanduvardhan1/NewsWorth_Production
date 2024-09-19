@@ -318,12 +318,87 @@ const dashboard = () => {
    <div>
     <h1 className="font-bold text-[30px] my-[20px]">Videos</h1>
 </div>
-<div>
+<div className="">
   <Dashboard1/>
 </div>
 
 
 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-6">
+
+{videoData.map((video) => (
+
+<div key={video.id} 
+          onClick={handleVideoClick}
+
+className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
+      {/* Video Thumbnail / Video Clip */}
+      <div
+        className="relative group"
+     
+      >
+        <video
+          ref={videoRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="w-full h-48 object-cover group-hover:opacity-100 opacity-90 transition-opacity duration-300"
+          muted
+          loop
+          src={video.videoSrc}
+        //   poster={video.thumbnail} // Show thumbnail image until the video is played
+        >
+        
+        </video>
+
+        {/* Video Duration Overlay */}
+        <div className="absolute bottom-0 right-0 bg-black bg-opacity-75 text-white text-xs px-2 py-1 m-1 rounded">
+          {video.duration}
+        </div>
+      </div>
+
+      {/* Video Info */}
+      <div className="p-4 flex">
+        {/* Channel Icon */}
+        <img
+          className="w-10 h-10 rounded-full mr-4"
+          src={video.channelIcon}
+          alt="Channel Icon"
+        />
+        <div>
+          {/* Title and Details */}
+          <h2 className="text-sm font-semibold text-gray-900 line-clamp-2 md:line-clamp-2">{video.title}</h2>
+          <p className="text-sm text-gray-500">
+            {video.channelName}
+          </p>
+          <p className="text-sm text-gray-500"> {video.views} • {video.postedTime}</p>
+        </div>
+
+        {/* Options Icon */}
+        <div className="ml-auto">
+          <svg
+            className="w-6 h-6 text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M12 6v.01M12 12v.01M12 18v.01"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+       ))}
+    </div>
+
+
+    <div>
+    <h1 className="font-bold text-[30px] my-[20px]">Latest</h1>
+</div>
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mb-6">
 
 {videoData.map((video) => (
 

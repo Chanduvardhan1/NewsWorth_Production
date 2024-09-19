@@ -2,11 +2,12 @@ import React , { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../src/assets/Images/home/newsworthlogo.png"
 import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 const navbar = () => {
-  const [activePage, setActivePage] = useState('home'); // default is 'home'
-
+  const [activePage, setActivePage] = useState('home'); 
+ 
   const navigate = useNavigate();
   // const handlehome= () => {
   //  navigate('/')
