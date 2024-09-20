@@ -434,6 +434,16 @@ const sendOtp = async () => {
       setHideOtpButtons(true);
       setShowPassword1(true);
       setIsEditable(false);
+    } else if(result.response === 'success' && result.response_message ==="Please complete your registration and activate your account." && result.data === "verified") {
+      setSuccess(result.response_message);
+      setVerify(false);
+      setshowOTP(false);
+      setResset(true);
+      setShowRegistr(false);
+      setShowOtpField1(true);
+      setHideOtpButtons(true);
+      setShowPassword1(true);
+      setIsEditable(false);
     } else if (result.response === 'success') {
       setSuccess(result.response_message);
       setMessage('');
