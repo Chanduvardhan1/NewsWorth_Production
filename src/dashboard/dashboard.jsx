@@ -386,6 +386,8 @@ const cardData = [
     const [isOpen, setIsOpen] = useState(false);
     const [videoData, setVideoData] = useState([]);
     const [imageData, setImageData] = useState([]);
+    const [cartCount, setCartCount] = useState(0); // State for cart count
+
     const [cartContent, setCartContent] = useState(null); // To store the content when added to the cart
     const [showCartNotification, setShowCartNotification] = useState(false); // For showing the cart notification
 const [finalprice,setfinalprice] = useState(null);

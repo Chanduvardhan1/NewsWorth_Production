@@ -179,6 +179,7 @@ const handleEmailChange = (e) => {
 
 const fetchLocationDetails = async () => {
   try {
+
     const response = await fetch(`${URL}/location_details/`, {
       method: 'POST',
       headers: {
