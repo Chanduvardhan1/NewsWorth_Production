@@ -35,11 +35,9 @@ const landing = () => {
         if (data.response === 'success') {
           setPhoto(data.url); // Set the image URL from the response
         } else {
-         
           setPhoto(defaultPhoto);
         }
       } else {
-        setError('Failed to fetch image');
         setPhoto(defaultPhoto);
       }
     } catch (error) {
