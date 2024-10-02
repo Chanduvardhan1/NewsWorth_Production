@@ -84,7 +84,6 @@ const Home = () => {
       <img src={home} alt="" width={500}  height={500} className="hover:duration-300 hover:scale-105 "/>
     </div>
    </main>
- 
    <div className="fixed bottom-0 right-0 ">
 
 

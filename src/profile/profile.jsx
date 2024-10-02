@@ -472,14 +472,14 @@ const closeModal = () => {
 
 <div className="w-full p-5">
   <div className=" shadow-xl rounded-2xl p-5">
-  <div className="relative items-start justify-start flex w-[20%] font-bold">
+  <div className="relative items-start justify-start flex w-[50%] font-bold">
       <div
         className={`cursor-pointer blue-color text-[14px] flex-1 text-center py-2 ${loginMethod === 'email' ? '' : ''}`}
         onClick={() => setUserType1('Email')}
       >
         Profile
       </div>
-      {/* <div
+      <div
         className={`cursor-pointer blue-color text-[14px] flex-1 text-center py-2 ${loginMethod === 'mobile' ? '' : ''}`}
         onClick={() => setUserType1('Mobile')}
       >
@@ -490,16 +490,16 @@ const closeModal = () => {
         onClick={() => setUserType1('User Id')}
       >
       Change Password
-      </div> */}
-      {/* <div
+      </div>
+      <div
     className={`absolute bottom-0 h-[2px] w-1/3 transition-all duration-300 ${
-      userType1 === 'Email' ? 'left-0 bg-red-500' : 
+      userType1 === 'Email' ? 'left-0 bg-blue-500' : 
       userType1 === 'Mobile' ? 'left-1/3 bg-blue-500' : 
-      'left-2/3 bg-green-500'
+      'left-2/3 bg-blue-500'
     }`}
-  /> */}
+  />
     </div>
-    <div className="border-[1px] w-[20%] border-gray-100"/>
+    <div className="border-[1px] w-[50%] border-gray-100"/>
     <div className="flex w-full items-start mt-5 py-5">
         <div className="space-y-1  ">
           <div>
@@ -510,14 +510,13 @@ const closeModal = () => {
          
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <p className="font-semibold text-gray-800">  {useremail ? 'Verified email' : userphonenumber ? 'Verified mobile' : 'No contact verified'}</p>
+              <p className="font-semibold text-gray-800">Verified email</p>
               <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="flex items-center justify-center gap-[50px]">
-              <p className="text-xl text-gray-700  font-bold">  {useremail ? useremail : userphonenumber ? userphonenumber : 'No contact information available'}
-              </p>
+              <p className="text-xl text-gray-700  font-bold">chanduvardhan85@gmail.com</p>
               <button   onClick={handlePopupToggle} className="text-gray-400 hover:text-gray-600">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
