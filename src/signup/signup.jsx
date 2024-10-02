@@ -8,6 +8,7 @@ import { URL } from "../url";
 import { TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import dayjs from 'dayjs';
 
 const signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -84,6 +85,32 @@ const [isEditable, setIsEditable] = useState(true);
 const [showMobileOTP, setShowMobileOTP] = useState(false);
   const [showEmailOTP, setShowEmailOTP] = useState(false);
 //   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const [error, setError] = useState(false);
+
+const handleDateChange = (e) => {
+  const selectedDate = new Date(e.target.value);
+  const currentDate = new Date();
+  
+  // Calculate the age
+  const age = currentDate.getFullYear() - selectedDate.getFullYear();
+  const monthDifference = currentDate.getMonth() - selectedDate.getMonth();
+
+  // Adjust if the user hasn't had their birthday this year yet
+  if (monthDifference < 0 || (monthDifference === 0 && currentDate.getDate() < selectedDate.getDate())) {
+    age--;
+  }
+
+  // Check if the age is under 18
+  if (age < 18) {
+    setError(true);
+  } else {
+    setError(false);
+    setDob(e.target.value);
+  }
+};
+
+// Set maximum date to 18 years ago
+const maxDate = dayjs().subtract(18, 'year').format('YYYY-MM-DD');
 
 useEffect(() => {
     let timer;
@@ -2036,48 +2063,43 @@ useEffect(() => {
                   />
                 </div>
                 <div className=" flex gap-[10px] justify-center">
-<TextField
-      type="date"
-      id="Date of Birth" 
-      label="Date of Birth" 
-      focused
-      disabled={!isEditable}
-      value={dob}
-      onChange={(e) => setDob(e.target.value)} 
-     variant="outlined"
-     className="w-full  px-7 py-4 rounded-[10px] bg-[#FFFFFF]  placeholder:text-[#CCCCCC]"
-
-     required
-     InputLabelProps={{
-      style: {
-        color: '#666666', // Reduced label color
-        fontSize: '14px', // Reduced label font size
-      },
-    }} 
-      InputProps={{
-        style: {
-       
-          fontSize: '14px',
-          height: "50px",
-          borderRadius: "10px",
-        },
-        endAdornment: (
-          <div
-            
-          >
-        {/* <img src="images\home\signup\password.png" alt="" className="w-[25px] text-blue-800" /> */}
-
-          </div>
-        ),
-        autoComplete: "off",
-      }} 
-      sx={{
-        // Disable autofill background
-        '& input:-webkit-autofill': {
-          WebkitBoxShadow: '0 0 0 1000px white inset', // Change the background color to white or any other color
-          WebkitTextFillColor: '#000', // Text color when autofilled
-        },
-      }} />
+                <TextField
+        type="date"
+        id="Date of Birth" 
+        label="Date of Birth" 
+        focused
+        disabled={!isEditable}
+        value={dob}
+        onChange={handleDateChange}
+        variant="outlined"
+        className="w-full  px-7 py-4 rounded-[10px] bg-[#FFFFFF]  placeholder:text-[#CCCCCC]"
+        required
+        InputLabelProps={{
+          style: {
+            color: '#666666', 
+            fontSize: '14px',
+          },
+        }}
+        InputProps={{
+          style: {
+            fontSize: '14px',
+            height: "50px",
+            borderRadius: "10px",
+          },
+          autoComplete: "off",
+        }}
+        sx={{
+          '& input:-webkit-autofill': {
+            WebkitBoxShadow: '0 0 0 1000px white inset', 
+            WebkitTextFillColor: '#000',
+          },
+        }}
+        inputProps={{
+          max: maxDate, // Disable selecting dates beyond today minus 18 years
+        }}
+        error={error}
+        helperText={error ? "You must be 18 years or older" : ""}
+      />
        <FormControl variant="outlined" required className="w-full mb-4">
           <InputLabel id="gender-label">Gender</InputLabel>
           <Select
