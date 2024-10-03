@@ -120,7 +120,7 @@ const landing = () => {
         <img src={logo} alt="" onClick={handleNavigation} className=" cursor-pointer" />
         </div>
         <div>
-        <h1 className="text-[25px] font-bold cursor-pointer bg-gradient-to-r from-blue-500 to-red-500 bg-clip-text text-transparent  " onClick={handleNavigation}>NewsWorth</h1>
+        <h1 className="text-[25px] font-bold cursor-pointer text-[#91caf2] text-transparent  " onClick={handleNavigation}>NewsWorth</h1>
 
         </div>
     </div>

@@ -658,7 +658,7 @@ const toggleOptions = (content_id) => {
 <div className="flex w-full items-center p-4">
       {/* Audio Tab */}
       <div
-        className={`flex w-full justify-center  items-center space-x-2 cursor-pointer shadow-xl ${activeTab === 'Audio' ? 'bg-gradient-to-r from-blue-400 to-red-300 text-white inline-block' : 'bg-white text-[#ce003d]'} p-2 rounded`}
+        className={`flex w-full justify-center  items-center space-x-2 cursor-pointer shadow-xl ${activeTab === 'Audio' ? 'bg-[#bbe0fa] text-white inline-block' : 'bg-white text-[#ce003d]'} p-2 rounded`}
         onClick={() => setActiveTab('Audio')}
       >
         <img src={Auido} alt="Audio Icon" className="w-[25px] h-[25px]" />
@@ -667,7 +667,7 @@ const toggleOptions = (content_id) => {
 
       {/* Videos Tab */}
       <div
-        className={`flex w-full justify-center items-center space-x-2 cursor-pointer shadow-xl ${activeTab === 'Videos' ? 'bg-gradient-to-r from-blue-400 to-red-300 text-white inline-block' : 'bg-white text-[#ce003d]'} p-2 rounded`}
+        className={`flex w-full justify-center items-center space-x-2 cursor-pointer shadow-xl ${activeTab === 'Videos' ? 'bg-[#bbe0fa] text-white inline-block' : 'bg-white text-[#ce003d]'} p-2 rounded`}
         onClick={() => setActiveTab('Videos')}
       >
         <img src={video} alt="Video Icon" className="w-[25px] h-[25px]" />
@@ -676,7 +676,7 @@ const toggleOptions = (content_id) => {
 
       {/* Images Tab */}
       <div
-        className={`flex w-full justify-center items-center space-x-2 cursor-pointer shadow-xl ${activeTab === 'Images' ? 'bg-gradient-to-r from-blue-400 to-red-300 text-white inline-block' : 'bg-white text-[#ce003d]'} p-2 rounded`}
+        className={`flex w-full justify-center items-center space-x-2 cursor-pointer shadow-xl ${activeTab === 'Images' ? 'bg-[#bbe0fa] text-white inline-block' : 'bg-white text-[#ce003d]'} p-2 rounded`}
         onClick={() => setActiveTab('Images')}
       >
         <img src={camera} alt="Image Icon" className="w-[25px] h-[25px]" />
