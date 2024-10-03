@@ -62,7 +62,6 @@ const [dateofbirth, setDateofbirth] = useState('');
 const [useraddressline1, setUseraddressline1] = useState('');
 const [useraddressline2, setUseraddressline2] = useState('');
 const [isEditable, setIsEditable] = useState(false);
-const userId = location.state?.user_id || localStorage.getItem("userId");
 const [selectedFile, setSelectedFile] = useState(null);
 
 const [photo, setPhoto] = useState(''); // State to store the image URL
@@ -71,6 +70,7 @@ const [error, setError] = useState(null); // State to handle error
 const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
 const [userType1, setUserType1] = useState("Email");
 const [loginMethod, setLoginMethod] = useState('email');
+const userId = location.state?.user_id || localStorage.getItem("userId");
 
 // Fetch profile image from the server
 const fetchProfileImage = async () => {
@@ -387,7 +387,7 @@ const closeModal = () => {
     <div className="">
 
     <div className="flex p-4 pl-[60px] justify-between items-center ">
-      <h1 className="blue-color font-bold text-[32px]">My Profile</h1>
+      <h1 className="blue-color font-semibold text-[25px]">My Profile</h1>
       <img src={logout1} alt="" onClick={handleBackToLogin} className="w-[25px] h-[25px] cursor-pointer" />
     </div>
     <div className=" flex flex-row w-full  gap-[20px] ">
@@ -466,7 +466,8 @@ const closeModal = () => {
       )}
     </div>
   <div>
-    <h1 className=" font-bold text-[18px]">{data1.first_name} {data1.middle_name} {data1.last_name} </h1>
+    <h1 className=" font-semibold text-[18px]">{data1.first_name} {data1.middle_name} {data1.last_name} </h1>
+    <p className=" font-semibold text-[14px]">User ID: {userId}</p>
   </div>
 </div>
 
@@ -504,19 +505,19 @@ const closeModal = () => {
         <div className="space-y-1  ">
           <div>
           <h2 className=" font-semibold text-gray-800">Name</h2>
-          <p className="text-xl text-gray-700 mb-5 font-bold">Chandu Vardhan</p>
-          
+          <p className=" text-gray-500 mb-5 font-semibold">{data1.first_name} {data1.middle_name} {data1.last_name} </p>
+      
           </div>
          
           <div className="space-y-1">
             <div className="flex items-center space-x-2">
-              <p className="font-semibold text-gray-800">Verified email</p>
+              <p className="font-semibold text-gray-800">  {useremail ? 'Verified email' : userphonenumber ? 'Verified mobile' : 'No contact verified'}</p>
               <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="flex items-center justify-center gap-[50px]">
-              <p className="text-xl text-gray-700  font-bold">chanduvardhan85@gmail.com</p>
+              <p className=" text-gray-500 font-semibold">{useremail ? useremail : userphonenumber ? userphonenumber : 'No contact information available'}</p>
               <button   onClick={handlePopupToggle} className="text-gray-400 hover:text-gray-600">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
