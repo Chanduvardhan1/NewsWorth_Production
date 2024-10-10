@@ -9,7 +9,6 @@ import { URL } from "../url";
 import { TextField, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 // import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 
@@ -2001,7 +2000,7 @@ useEffect(() => {
     <label htmlFor="termsCheckbox" className="ml-2 text-sm text-gray-700">
       I agree with the{" "}
       <a href="#" className="text-blue-600 underline">
-        Terms and Conditions
+        terms and conditions
       </a>
     </label>
   </div>
