@@ -91,6 +91,7 @@ const [oldPassword, setOldPassword] = useState(localStorage.getItem('password'))
 const [videoData, setVideoData] = useState([]);
 const [imageData, setImageData] = useState([]);
 const [activeTab, setActiveTab] = useState('Videos'); // Default to Audio
+const [message1, setMessage1] = useState('');
 
 const handleChangePassword = async (event) => {
   event.preventDefault(); // Prevent page refresh
@@ -305,7 +306,7 @@ const handleSaveClick = async () => {
 
     const data = await response.json();
     if (data.response === 'success') {
-      toast.success(data.response_message);
+      setMessage1(data.response_message);
 
       // Handle success, maybe show a success message or reset the isEditable flag
       setShowRegistr(true)
@@ -829,7 +830,8 @@ const toggleSidebar = () => {
             )}
             <div className="flex justify-between"> 
               <div className="">
-            
+              {message1 && <p className="text-green-500  w-[320px]">{message1}</p>}
+
                {message && <p className="text-red-500  w-[320px]">{message}</p>}
               </div>
             
@@ -1131,7 +1133,8 @@ const toggleSidebar = () => {
             )}
             <div className="flex justify-between"> 
               <div className="">
-            
+              {message1 && <p className="text-green-500  w-[320px]">{message1}</p>}
+
                {message && <p className="text-red-500  w-[320px]">{message}</p>}
               </div>
             
