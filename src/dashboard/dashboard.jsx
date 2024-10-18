@@ -706,6 +706,7 @@ useEffect(() => {
         await fetchCartItems();
         startTimer();
         setShowTimer(true); 
+        return;
       }
   
       // Handle known failure cases (content already in cart)
