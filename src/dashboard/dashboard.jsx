@@ -1011,7 +1011,8 @@ useEffect(() => {
   ))
 ) : (
   videoData
-    .filter((videoItem) => 
+    .filter((videoItem) =>
+    !videoItem.cart_flag && //
     !videoItem.purchased_flag && // Exclude purchased videos
     !videoItem.sold_flag)
     .map((videoItem) => {
@@ -1046,7 +1047,7 @@ useEffect(() => {
             <img src={video} alt="" className="w-[25px] h-[25px]" />
             <div className="text-lg" onClick={() => handleVideoClick(videoItem)}>
               <p className="font-bold text-blue-600">
-                 {videoItem.price}{' '}
+              ₹{videoItem.price}{' '}
                 <span className="text-sm text-gray-500">
                   <span className="line-through text-sm text-gray-500">{videoItem.final_price}</span> at Discount {videoItem.discount}
                 </span>
@@ -1126,6 +1127,7 @@ useEffect(() => {
         ) : (
 imageData
     .filter((imageItem) => 
+    !imageItem.cart_flag && 
     !imageItem.purchased_flag && // Exclude purchased videos
     !imageItem.sold_flag) // Filter to show only images
     .map((imageItem) => {
@@ -1156,7 +1158,7 @@ imageData
 {/* Price Info */}
 <div className="text-lg" onClick={() => handleImagesClick(imageItem)}>
   <p className="font-bold text-blue-600">
-  {imageItem.price}{' '}
+  ₹{imageItem.price}{' '}
     <span className="text-sm text-gray-500">
       <span className="line-through text-sm text-gray-500">{imageItem.final_price}</span> at Discount {imageItem.discount}%
     </span>
@@ -1337,7 +1339,7 @@ imageData
     type="video/mp4" // Ensure you specify the correct video type
     onError={(e) => {
       console.error('Error loading video:', e);
-      alert('Video failed to load. Please check the video URL or format.');
+      // alert('Video failed to load. Please check the video URL or format.');
     }}
   >
     Your browser does not support the video tag.
