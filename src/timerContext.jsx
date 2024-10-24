@@ -34,8 +34,8 @@ export const TimerProvider = ({ children }) => {
       }
     } else if (timeLeft === 0) {
       // Handle timer expiration logic (redirect or alert)
-      // toast.error("Time is up! Redirecting to the dashboard.");
-      // window.location.href = "/dashboard"; // Redirect to dashboard
+      toast.error("Time is up! Redirecting to the dashboard.");
+      window.location.href = "/dashboard"; // Redirect to dashboard
     }
   
     // Cleanup the timer
