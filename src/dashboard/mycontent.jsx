@@ -104,6 +104,11 @@ const handlePricingClick = (contentId) => {
   
   const updatePriceAndDiscount = async () => {
     try {
+        const authToken = localStorage.getItem("authToken"); // Retrieve the auth token from localStorage
+        if (!authToken) {
+          navigate('/login');
+          return;
+        }
       const response = await fetch(`${URL}/update-price-discount`, {
         method: 'POST',
         headers: {
@@ -144,6 +149,11 @@ const handlePricingClick = (contentId) => {
 // Add any dependencies if needed
 const uploadContent = async () => {
     try {
+        const authToken = localStorage.getItem("authToken"); // Retrieve the auth token from localStorage
+        if (!authToken) {
+          navigate('/login');
+          return;
+        }
       const response = await fetch(`${URL}/uploaded_content?user_id=${userId}`, {
         method: 'POST',
         headers: {
@@ -183,6 +193,11 @@ const uploadContent = async () => {
   }, []);
 const downloadContent = async (contentId) => {
   try {
+    const authToken = localStorage.getItem("authToken"); // Retrieve the auth token from localStorage
+    if (!authToken) {
+      navigate('/login');
+      return;
+    }
     const response = await fetch(`${URL}/download-content?content_id=${contentId}`, {
       method: 'POST',
       headers: {
@@ -220,6 +235,11 @@ const toggleimage = (content_id) => {
 };
 const deleteContent = async (contentId) => {
   try {
+    const authToken = localStorage.getItem("authToken"); // Retrieve the auth token from localStorage
+    if (!authToken) {
+      navigate('/login');
+      return;
+    }
     const response = await fetch(`${URL}/delete content`, {
       method: 'POST',
       headers: {
@@ -317,6 +337,11 @@ useEffect(() => {
   
   const handleAddToCart = async (contentId, contentLink, finalprice) => {
     try {
+        const authToken = localStorage.getItem("authToken"); // Retrieve the auth token from localStorage
+        if (!authToken) {
+          navigate('/login');
+          return;
+        }
       const response = await fetch(`${URL}/add_to_cart`, {
         method: 'POST',
         headers: {
@@ -385,6 +410,11 @@ useEffect(() => {
   };
   const fetchCartItems = async () => {
     try {
+        const authToken = localStorage.getItem("authToken"); // Retrieve the auth token from localStorage
+        if (!authToken) {
+          navigate('/login');
+          return;
+        }
       const response = await fetch(
         `${URL}/total_cart_items?user_id=${userId}`,
         {
