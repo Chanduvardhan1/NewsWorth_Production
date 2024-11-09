@@ -489,7 +489,7 @@ const sendOtp = async () => {
   };
 
   try {
-    const response = await fetch(`${URL}/Send OTP`, {
+    const response = await fetch(`${URL}/Send_OTP`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
